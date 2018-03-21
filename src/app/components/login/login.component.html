@@ -1,15 +1,48 @@
-<form (ngSubmit)="onSubmitLogin(loginForm)" #loginForm="ngForm">
-  <div>
-    <label for="email">Email</label>
-    <input type="text" name="email" [(ngModel)]="user.email" required>
-  </div>
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
 
-  <div>
-    <label for="password">Password</label>
-    <input type="password" name="password" [(ngModel)]="user.password" required>
+        <form (ngSubmit)="onSubmitLogin(loginForm)" #loginForm="ngForm">
+          <div class="form-group" [class.has-error]="email.errors && email.touched">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" #email="ngModel" required email>
+            </div>
+            <label class="control-label" *ngIf="email.errors && email.touched">
+              <ul>
+                <li *ngIf="email.errors.required">Required</li>
+                <li *ngIf="email.errors.email">Invalid email format</li>
+              </ul>
+            </label>
+          </div>
+
+          <div class="form-group" [class.has-error]="password.errors && password.touched">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-lock"></i>
+              </span>
+              <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" #password="ngModel" required>
+            </div>
+            <label class="control-label" *ngIf="password.errors && password.touched">
+              <ul>
+                <li *ngIf="password.errors.required">Required</li>
+              </ul>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-block btn-primary" [disabled]="!loginForm.valid">Login</button>
+          </div>
+        </form>
   </div>
-  
-  <button type="submit" [disabled]="!loginForm.valid">Login</button>
-  
-  <p class="error" *ngIf="error">{{ error | json }}</p>
-</form>
+  <!-- <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <hr>
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        Dont't have an account?
+        <a href="/signup">Sign up </a>
+      </div>
+    </div>
+  </div> -->
+</div>
