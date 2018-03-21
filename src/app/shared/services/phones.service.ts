@@ -39,7 +39,7 @@ export class PhonesService {
 
   private handleError(error: Response): Observable<any> {
     if (!environment.production) {
-      console.error(`Phone Service error: ${error.json()}`);
+      console.error(`${this.constructor.name} error: ${error.json()}`);
     }
     return Observable.throw(error.json());
   }

@@ -12,7 +12,7 @@ export class SessionService {
   private static defaultHeaders: Headers = new Headers({ 'Content-Type': 'application/json' });
   private static defaultOptions: RequestOptions = new RequestOptions({ headers: SessionService.defaultHeaders, withCredentials: true });
 
-  user: User;
+  private user: User;
 
   constructor(private http: Http) {
     this.user = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
@@ -33,9 +33,9 @@ export class SessionService {
     return this.user;
   }
 
-  protected handleError(error: Response | any): Observable<any> {
+  private handleError(error: Response | any): Observable<any> {
     if (!environment.production) {
-      console.error(`Phone Service error: ${error.json()}`);
+      console.error(`${this.constructor.name} error: ${error.json()}`);
     }
 
     return Observable.throw(error.json());
