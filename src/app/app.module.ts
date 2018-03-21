@@ -13,13 +13,15 @@ import { SessionService } from './shared/services/session.service';
 import { routes } from './app.routes';
 import { PhoneItemComponent } from './components/phone/phone-item/phone-item.component';
 import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/misc/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhoneListComponent,
     PhoneItemComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -23,7 +23,15 @@ export class SessionService {
       .map(res => {
         return this.doAuthentication(res.json());
       })
-      .catch(this.handleError);
+      .catch(error => this.handleError(error));
+  }
+
+  logout(): Observable<void> {
+    return this.http.delete(SessionService.BASE_API, SessionService.defaultOptions)
+      .map(res => {
+        return this.doLogout();
+      })
+      .catch(error => this.handleError(error));
   }
 
   private doAuthentication(user: User): User {
@@ -33,9 +41,14 @@ export class SessionService {
     return this.user;
   }
 
+  private doLogout(): void {
+    this.user = null;
+    localStorage.removeItem(CURRENT_USER_KEY);
+  }
+
   private handleError(error: Response | any): Observable<any> {
     if (!environment.production) {
-      console.error(`${this.constructor.name} error: ${error.json()}`);
+      console.error(`${this.constructor.name} error: ${error}`);
     }
 
     return Observable.throw(error.json());
