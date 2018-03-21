@@ -1,5 +1,4 @@
-<h1> Phone details </h1>
-<a [routerLink]="['/phones']"> Back to list </a>
+<a [routerLink]="['/phones']"> <i class="fa fa-arrow-left"></i></a>
 
 <div *ngIf="phone">
   <div class="phone-thumbnail">
@@ -16,6 +15,6 @@
         <li *ngFor="let spec of phone.specs"> {{ spec }} </li>
       </ul>
     </div>
-    <button (click)="onClickDelete()">Delete</button>
+    <button class="btn btn-danger" (click)="onClickDelete()">Delete</button>
   </div>
 </div>

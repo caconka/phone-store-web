@@ -1,7 +1,5 @@
-<h1> Phone list </h1>
-
-<div>
-  <div *ngFor="let phone of phones" class="phone">
+<div class="row">
+  <div *ngFor="let phone of phones" class="phone col-xs-12 col-sm-3">
     <img [src]="phone.image" />
     <h3> {{ phone.name }} </h3>
     <p> {{ phone.brand }} </p>
