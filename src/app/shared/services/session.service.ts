@@ -1,3 +1,4 @@
+import { BaseApiService } from './base-api.service';
 import { User } from './../model/user.model';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { environment } from './../../../environments/environment';
@@ -7,19 +8,18 @@ import { Observable } from 'rxjs/Rx';
 const CURRENT_USER_KEY = 'currentUser';
 
 @Injectable()
-export class SessionService {
-  private static readonly BASE_API = `${environment.baseApi}/session`;
-  private static defaultHeaders: Headers = new Headers({ 'Content-Type': 'application/json' });
-  private static defaultOptions: RequestOptions = new RequestOptions({ headers: SessionService.defaultHeaders, withCredentials: true });
+export class SessionService extends BaseApiService {
+  private static readonly SESSION_API = `${BaseApiService.BASE_API}/session`;
 
   private user: User;
 
   constructor(private http: Http) {
+    super();
     this.user = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
   }
 
   authenticate(user: User): Observable<User> {
-    return this.http.post(SessionService.BASE_API, JSON.stringify(user), SessionService.defaultOptions)
+    return this.http.post(SessionService.SESSION_API, JSON.stringify(user), BaseApiService.defaultOptions)
       .map(res => {
         return this.doAuthentication(res.json());
       })
@@ -27,7 +27,7 @@ export class SessionService {
   }
 
   logout(): Observable<void> {
-    return this.http.delete(SessionService.BASE_API, SessionService.defaultOptions)
+    return this.http.delete(SessionService.SESSION_API, BaseApiService.defaultOptions)
       .map(res => {
         return this.doLogout();
       })
@@ -46,12 +46,5 @@ export class SessionService {
     localStorage.removeItem(CURRENT_USER_KEY);
   }
 
-  private handleError(error: Response | any): Observable<any> {
-    if (!environment.production) {
-      console.error(`${this.constructor.name} error: ${error}`);
-    }
-
-    return Observable.throw(error.json());
-  }
 }
 

@@ -1,6 +1,6 @@
-import { SessionService } from './../../shared/services/session.service';
+import { SessionService } from './../../../shared/services/session.service';
 import { print } from 'util';
-import { User } from './../../shared/model/user.model';
+import { User } from './../../../shared/model/user.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   user: User = new User();
-  error: Object;
+  apiError: string;
 
   constructor(
     private sessionService: SessionService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() { }
 
@@ -24,11 +24,10 @@ export class LoginComponent implements OnInit {
     this.sessionService.authenticate(this.user).subscribe(
       (user) => {
         loginForm.reset();
-
         this.router.navigate(['/phones']);
       },
       (error) => {
-        this.error = error;
+        this.apiError = error.message;
       }
     );
   }

@@ -12,8 +12,10 @@ import { PhonesService } from './shared/services/phones.service';
 import { SessionService } from './shared/services/session.service';
 import { routes } from './app.routes';
 import { PhoneItemComponent } from './components/phone/phone-item/phone-item.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/misc/login/login.component';
 import { NavbarComponent } from './components/misc/navbar/navbar.component';
+import { SignupComponent } from './components/misc/signup/signup.component';
+import { UsersService } from './shared/services/users.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { NavbarComponent } from './components/misc/navbar/navbar.component';
     PhoneListComponent,
     PhoneItemComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { NavbarComponent } from './components/misc/navbar/navbar.component';
   ],
   providers: [
     PhonesService,
-    SessionService
+    SessionService,
+    UsersService
   ],
   bootstrap: [AppComponent]
 })
