@@ -1,3 +1,5 @@
+import { PhoneDetailsResolverGuard } from './shared/resolvers/phone-details-resolver.guard';
+import { IsAuthenticatedGuard } from './shared/guards/is-authenticated.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -35,7 +37,9 @@ import { UsersService } from './shared/services/users.service';
   providers: [
     PhonesService,
     SessionService,
-    UsersService
+    UsersService,
+    IsAuthenticatedGuard,
+    PhoneDetailsResolverGuard
   ],
   bootstrap: [AppComponent]
 })

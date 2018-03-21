@@ -19,13 +19,9 @@ export class PhoneItemComponent implements OnInit {
 
   ngOnInit() {
     this.routes
-      .params
-      .subscribe(params => {
-        this.phonesService.get(params['id'])
-          .subscribe(
-            (phone) => { this.phone = phone; },
-            (error) => {  this.error = error; }
-          );
+      .data
+      .subscribe(data => {
+        this.phone = data['phone'];
       });
   }
 

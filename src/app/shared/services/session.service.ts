@@ -34,6 +34,10 @@ export class SessionService extends BaseApiService {
       .catch(error => this.handleError(error));
   }
 
+  isAuthenticated(): boolean {
+    return this.user ? true : false;
+  }
+
   private doAuthentication(user: User): User {
     this.user = user;
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(this.user));
