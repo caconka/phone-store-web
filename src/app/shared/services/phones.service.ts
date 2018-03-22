@@ -26,28 +26,13 @@ export class PhonesService extends BaseApiService {
   }
 
   create(phone: Phone): Observable<Phone> {
-    const data = new FormData();
-
-    data.append('brand', phone.brand);
-    data.append('name', phone.name);
-    data.append('specs', JSON.stringify(phone.specs));
-    data.append('image', phone.image);
-
-    return this.http.post(PhonesService.PHONES_API, data, new RequestOptions({ withCredentials: true }))
+    return this.http.post(PhonesService.PHONES_API, phone.asFormData(), new RequestOptions({ withCredentials: true }))
       .map((res: Response) => res.json())
       .catch(error => this.handleError(error));
   }
 
   edit(phone: Phone): Observable<Phone> {
-    const data = new FormData();
-
-    data.append('id', phone.id);
-    data.append('brand', phone.brand);
-    data.append('name', phone.name);
-    data.append('specs', JSON.stringify(phone.specs));
-    data.append('image', phone.image);
-
-    return this.http.put(`PhonesService.PHONES_API/${phone.id}`, data, new RequestOptions({ withCredentials: true }))
+    return this.http.put(`PhonesService.PHONES_API/${phone.id}`, phone.asFormData(), new RequestOptions({ withCredentials: true }))
       .map((res: Response) => res.json())
       .catch(error => this.handleError(error));
   }
