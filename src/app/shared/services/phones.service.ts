@@ -2,7 +2,7 @@ import { BaseApiService } from './base-api.service';
 import { Phone } from '../model/phone.model';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, RequestOptions, Response, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
@@ -25,8 +25,29 @@ export class PhonesService extends BaseApiService {
       .catch(error => this.handleError(error));
   }
 
+  create(phone: Phone): Observable<Phone> {
+    const data = new FormData();
+
+    data.append('brand', phone.brand);
+    data.append('name', phone.name);
+    data.append('specs', JSON.stringify(phone.specs));
+    data.append('image', phone.image);
+
+    return this.http.post(PhonesService.PHONES_API, data, new RequestOptions({ withCredentials: true }))
+      .map((res: Response) => res.json())
+      .catch(error => this.handleError(error));
+  }
+
   edit(phone: Phone): Observable<Phone> {
-    return this.http.put(`${PhonesService.PHONES_API}/${phone.id}`, JSON.stringify(phone), BaseApiService.defaultOptions)
+    const data = new FormData();
+
+    data.append('id', phone.id);
+    data.append('brand', phone.brand);
+    data.append('name', phone.name);
+    data.append('specs', JSON.stringify(phone.specs));
+    data.append('image', phone.image);
+
+    return this.http.put(`PhonesService.PHONES_API/${phone.id}`, data, new RequestOptions({ withCredentials: true }))
       .map((res: Response) => res.json())
       .catch(error => this.handleError(error));
   }

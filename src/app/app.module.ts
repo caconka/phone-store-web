@@ -18,6 +18,8 @@ import { LoginComponent } from './components/misc/login/login.component';
 import { NavbarComponent } from './components/misc/navbar/navbar.component';
 import { SignupComponent } from './components/misc/signup/signup.component';
 import { UsersService } from './shared/services/users.service';
+import { PhoneCreateComponent } from './components/phone/phone-create/phone-create.component';
+import { PhoneBaseComponent } from './components/phone/phone-base/phone-base.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { UsersService } from './shared/services/users.service';
     PhoneItemComponent,
     LoginComponent,
     NavbarComponent,
-    SignupComponent
+    SignupComponent,
+    PhoneCreateComponent,
+    PhoneBaseComponent
   ],
   imports: [
     BrowserModule,
