@@ -1,6 +1,7 @@
+import { Observable, Subscription } from 'rxjs/Rx';
 import { User } from './../../../shared/model/user.model';
 import { SessionService } from './../../../shared/services/session.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,8 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   private user: User;
+  private userSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -17,6 +19,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.sessionService.getUser();
+    this.userSubscription = this.sessionService.onUserChanges()
+      .subscribe(user => this.user = user);
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
   onClickLogout() {
