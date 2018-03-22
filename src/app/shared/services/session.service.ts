@@ -38,6 +38,10 @@ export class SessionService extends BaseApiService {
     return this.user ? true : false;
   }
 
+  getUser(): User {
+    return this.user;
+  }
+
   private doAuthentication(user: User): User {
     this.user = user;
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(this.user));
