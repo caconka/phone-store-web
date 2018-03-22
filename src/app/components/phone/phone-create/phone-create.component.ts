@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 export class PhoneCreateComponent {
   phone: Phone = new Phone();
   @ViewChild('imageFile') imageFile;
+  @ViewChild('phoneForm') phoneForm;
 
   constructor(
     private router: Router,
@@ -35,9 +36,20 @@ export class PhoneCreateComponent {
       this.phone.image = imageFile.files[0];
       this.phonesService.create(this.phone)
         .subscribe((phone) => {
-          console.log(phone);
+          phoneForm.reset();
           this.router.navigate(['/phones']);
         });
+    }
+  }
+
+  canLeaveTheComponent(): boolean {
+    if (this.phoneForm.dirty) {
+      return window.confirm(`
+        Unsaved changes.
+        Are you sure you want to leave?
+    `);
+    } else {
+      return true;
     }
   }
 }

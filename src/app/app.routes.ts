@@ -1,3 +1,4 @@
+import { CanLeavePhoneCreateGuard } from './shared/guards/can-leave-phone-create.guard';
 import { PhoneBaseComponent } from './components/phone/phone-base/phone-base.component';
 import { PhoneCreateComponent } from './components/phone/phone-create/phone-create.component';
 import { PhoneDetailsResolverGuard } from './shared/resolvers/phone-details-resolver.guard';
@@ -19,6 +20,7 @@ export const routes: Routes = [
             {
                 path: 'new',
                 canActivate: [IsAuthenticatedGuard],
+                canDeactivate: [CanLeavePhoneCreateGuard],
                 component: PhoneCreateComponent
             },
             {

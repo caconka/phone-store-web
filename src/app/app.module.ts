@@ -1,3 +1,4 @@
+import { CanLeavePhoneCreateGuard } from './shared/guards/can-leave-phone-create.guard';
 import { PhoneDetailsResolverGuard } from './shared/resolvers/phone-details-resolver.guard';
 import { IsAuthenticatedGuard } from './shared/guards/is-authenticated.guard';
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,7 +44,8 @@ import { PhoneBaseComponent } from './components/phone/phone-base/phone-base.com
     SessionService,
     UsersService,
     IsAuthenticatedGuard,
-    PhoneDetailsResolverGuard
+    PhoneDetailsResolverGuard,
+    CanLeavePhoneCreateGuard
   ],
   bootstrap: [AppComponent]
 })
