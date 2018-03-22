@@ -1,3 +1,5 @@
+import { PhoneBaseComponent } from './components/phone/phone-base/phone-base.component';
+import { PhoneCreateComponent } from './components/phone/phone-create/phone-create.component';
 import { PhoneDetailsResolverGuard } from './shared/resolvers/phone-details-resolver.guard';
 import { IsAuthenticatedGuard } from './shared/guards/is-authenticated.guard';
 import { SignupComponent } from './components/misc/signup/signup.component';
@@ -10,12 +12,24 @@ export const routes: Routes = [
     { path: '', redirectTo: 'phones', pathMatch: 'full'},
     { path: 'phones', canActivate: [IsAuthenticatedGuard], component: PhoneListComponent},
     {
-        path: 'phones/:id',
+        path: 'phones',
         canActivate: [IsAuthenticatedGuard],
-        resolve: {
-            phone: PhoneDetailsResolverGuard
-        },
-        component: PhoneItemComponent
+        component: PhoneBaseComponent,
+        children: [
+            {
+                path: 'new',
+                canActivate: [IsAuthenticatedGuard],
+                component: PhoneCreateComponent
+            },
+            {
+                path: ':id',
+                canActivate: [IsAuthenticatedGuard],
+                resolve: {
+                    phone: PhoneDetailsResolverGuard
+                },
+                component: PhoneItemComponent
+            }
+        ]
     },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
