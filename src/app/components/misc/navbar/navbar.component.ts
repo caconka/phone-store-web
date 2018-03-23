@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  private user: User;
-  private userSubscription: Subscription;
+  user: User;
+  userSubscription: Subscription;
 
   constructor(
     private router: Router,

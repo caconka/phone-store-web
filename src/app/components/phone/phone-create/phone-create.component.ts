@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class PhoneCreateComponent {
   phone: Phone = new Phone();
+  apiError: string;
   @ViewChild('imageFile') imageFile;
   @ViewChild('phoneForm') phoneForm;
 
@@ -35,10 +36,15 @@ export class PhoneCreateComponent {
     if (imageFile.files && imageFile.files[0]) {
       this.phone.image = imageFile.files[0];
       this.phonesService.create(this.phone)
-        .subscribe((phone) => {
-          phoneForm.reset();
-          this.router.navigate(['/phones']);
-        });
+        .subscribe(
+          (phone) => {
+            phoneForm.reset();
+            this.router.navigate(['/phones']);
+          },
+          (error) => {
+            this.apiError = error;
+          }
+      );
     }
   }
 
