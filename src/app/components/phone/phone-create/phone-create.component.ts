@@ -1,6 +1,6 @@
 import { PhonesService } from './../../../shared/services/phones.service';
 import { Phone } from './../../../shared/model/phone.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 export class PhoneCreateComponent {
   phone: Phone = new Phone();
   apiError: string;
-  @ViewChild('imageFile') imageFile;
+  @ViewChild('imageFile') imageFile: ElementRef;
   @ViewChild('phoneForm') phoneForm;
 
   constructor(

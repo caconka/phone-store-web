@@ -21,7 +21,11 @@ export class SessionService extends BaseApiService {
   }
 
   authenticate(user: User): Observable<User> {
-    return this.http.post(SessionService.SESSION_API, JSON.stringify(user), BaseApiService.defaultOptions)
+    return this.http.post(
+      SessionService.SESSION_API,
+      JSON.stringify(user),
+      BaseApiService.defaultOptions
+    )
       .map(res => {
         return this.doAuthentication(res.json());
       })
@@ -29,7 +33,10 @@ export class SessionService extends BaseApiService {
   }
 
   logout(): Observable<void> {
-    return this.http.delete(SessionService.SESSION_API, BaseApiService.defaultOptions)
+    return this.http.delete(
+      SessionService.SESSION_API,
+      BaseApiService.defaultOptions
+    )
       .map(res => {
         return this.doLogout();
       })

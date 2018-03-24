@@ -13,7 +13,11 @@ export class UsersService extends BaseApiService {
   }
 
   create(user: User): Observable<User> {
-    return this.http.post(UsersService.USERS_API, JSON.stringify(user), BaseApiService.defaultOptions)
+    return this.http.post(
+      UsersService.USERS_API,
+      JSON.stringify(user),
+      BaseApiService.defaultOptions
+    )
       .map(res => res.json())
       .catch(error => this.handleError(error));
   }

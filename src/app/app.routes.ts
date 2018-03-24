@@ -11,7 +11,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'phones', pathMatch: 'full'},
-    { path: 'phones', canActivate: [IsAuthenticatedGuard], component: PhoneListComponent},
+    {
+      path: 'phones',
+      canActivate: [IsAuthenticatedGuard],
+      component: PhoneListComponent
+    },
     {
         path: 'phones',
         canActivate: [IsAuthenticatedGuard],
