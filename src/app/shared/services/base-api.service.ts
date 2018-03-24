@@ -15,8 +15,9 @@ export class BaseApiService {
     if (!environment.production) {
       console.error(`${this.constructor.name} error: ${error}`);
     }
-
-    return Observable.throw(error.json());
+    const errorData = error.json();
+    errorData.status = error.status;
+    return Observable.throw(errorData);
   }
 
 }

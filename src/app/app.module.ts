@@ -1,8 +1,9 @@
+import { GlobalErrorHandlerService } from './shared/services/global-error-handler.service';
 import { CanLeavePhoneCreateGuard } from './shared/guards/can-leave-phone-create.guard';
 import { PhoneDetailsResolverGuard } from './shared/resolvers/phone-details-resolver.guard';
 import { IsAuthenticatedGuard } from './shared/guards/is-authenticated.guard';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -45,7 +46,11 @@ import { PhoneBaseComponent } from './components/phone/phone-base/phone-base.com
     UsersService,
     IsAuthenticatedGuard,
     PhoneDetailsResolverGuard,
-    CanLeavePhoneCreateGuard
+    CanLeavePhoneCreateGuard,
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandlerService
+    }
   ],
   bootstrap: [AppComponent]
 })

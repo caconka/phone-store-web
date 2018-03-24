@@ -55,7 +55,7 @@ export class SessionService extends BaseApiService {
     return this.user;
   }
 
-  private doLogout(): void {
+  protected doLogout(): void {
     this.user = null;
     localStorage.removeItem(CURRENT_USER_KEY);
     this.notifyUserChanges();
